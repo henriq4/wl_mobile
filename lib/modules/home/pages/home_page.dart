@@ -1,36 +1,72 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:Taski/modules/home/models/item_model.dart';
+import 'package:Taski/modules/home/view_models/item_list_view_model.dart';
+import 'package:Taski/modules/home/widgets/app_bar_widget.dart';
+import 'package:Taski/modules/home/widgets/todo_widget.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late ItemListViewModel _viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    _viewModel = ItemListViewModel(ItemList());
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
+      appBar: AppBarWidget(),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset("assets/images/logo.png", width: 30),
-            Text("Taski"),
-          ],
-        ),
-        actions: [
-          Text("John"),
-          Image(
-            image: CachedNetworkImageProvider(
-              "https://avatars.githubusercontent.com/u/2975483?v=4",
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Welcome, John.',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    'You’ve got 7 tasks to do.',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
+              ),
             ),
-            width: 30,
-          ),
-        ],
-      ),
-      body: Center(
-        child: CachedNetworkImage(
-          imageUrl: "https://avatars.githubusercontent.com/u/2975483?v=4",
-          width: 30,
-          height: 30,
-          placeholder: (context, url) => CircularProgressIndicator(),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: _viewModel.items.length,
+              itemBuilder: (context, index) {
+                var item = _viewModel.items[index];
+
+                return TodoWidget(
+                  title: item.name,
+                  subtitle: item.description,
+                  isCompleted: item.isCompleted,
+                  onCheckChanged: () {
+                    setState(() {
+                      item.isCompleted = !item.isCompleted;
+                    });
+                  },
+                  onDelete: () {
+                    print('Deleted "Design sign up flow"');
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
