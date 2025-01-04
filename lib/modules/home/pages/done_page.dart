@@ -3,19 +3,19 @@ import 'package:Taski/modules/home/widgets/app_bar_widget.dart';
 import 'package:Taski/modules/home/widgets/todo_widget.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class DonePage extends StatefulWidget {
   final ItemListViewModel viewModel;
 
-  const HomePage({
+  const DonePage({
     super.key,
     required this.viewModel,
   });
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<DonePage> createState() => _DonePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _DonePageState extends State<DonePage> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
 
   @override
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  get pendingItemsCount => widget.viewModel.pendingItemsCount;
+  get completedItemsCount => widget.viewModel.completedItemsCount;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(fontSize: 16),
                   ),
                   Text(
-                    'Youve got $pendingItemsCount tasks to do.',
+                    'You’ve got $completedItemsCount tasks to do.',
                     style: TextStyle(fontSize: 16),
                   ),
                 ],
@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index, animation) {
                 var item = widget.viewModel.items[index];
 
-                if (item.isCompleted) {
+                if (!item.isCompleted) {
                   return SizedBox();
                 }
 

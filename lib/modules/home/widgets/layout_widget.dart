@@ -1,4 +1,6 @@
+import 'package:Taski/modules/home/pages/done_page.dart';
 import 'package:Taski/modules/home/pages/home_page.dart';
+import 'package:Taski/modules/home/view_models/item_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
@@ -12,6 +14,8 @@ class LayoutWidget extends StatefulWidget {
 }
 
 class _LayoutWidgetState extends State<LayoutWidget> {
+  final ItemListViewModel _viewModel = ItemListViewModel();
+
   var _selectedIndex = 0;
 
   @override
@@ -32,7 +36,10 @@ class _LayoutWidgetState extends State<LayoutWidget> {
       body: LazyLoadIndexedStack(
         index: _selectedIndex,
         children: [
-          HomePage(),
+          HomePage(viewModel: _viewModel),
+          Placeholder(),
+          Placeholder(),
+          DonePage(viewModel: _viewModel),
         ],
       ),
       bottomNavigationBar: NavigationBar(
