@@ -23,6 +23,30 @@ class ItemListViewModel extends ChangeNotifier {
     ),
   ];
 
+  void addItem(String name, String description) {
+    final newItem = Item(
+      name: name,
+      description: description,
+      isCompleted: false,
+    );
+
+    _items.add(newItem);
+
+    notifyListeners();
+  }
+
+  void deleteItem(Item item) {
+    _items.remove(item);
+
+    notifyListeners();
+  }
+
+  void deleteAllDone() {
+    _items.removeWhere((element) => element.isCompleted);
+
+    notifyListeners();
+  }
+
   List<Item> _filteredItems = [];
 
   List<Item> get items => _items;

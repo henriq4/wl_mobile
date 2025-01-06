@@ -16,8 +16,6 @@ class DonePage extends StatefulWidget {
 }
 
 class _DonePageState extends State<DonePage> {
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-
   @override
   void initState() {
     super.initState();
@@ -38,26 +36,40 @@ class _DonePageState extends State<DonePage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Welcome, John.',
-                    style: TextStyle(fontSize: 16),
+                    'Completed Tasks',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF3F3D56),
+                    ),
                   ),
-                  Text(
-                    'You’ve got $completedItemsCount tasks to do.',
-                    style: TextStyle(fontSize: 16),
-                  ),
+                  TextButton(
+                    style: ButtonStyle(
+                      overlayColor:
+                          WidgetStateProperty.all(Colors.red.shade100),
+                    ),
+                    onPressed: () {
+                      widget.viewModel.deleteAllDone();
+                    },
+                    child: Text(
+                      'Delete all',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.red,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
-            AnimatedList(
-              key: _listKey,
+            ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              initialItemCount: widget.viewModel.items.length,
-              itemBuilder: (context, index, animation) {
+              itemCount: widget.viewModel.items.length,
+              itemBuilder: (context, index) {
                 var item = widget.viewModel.items[index];
 
                 if (!item.isCompleted) {
@@ -72,7 +84,7 @@ class _DonePageState extends State<DonePage> {
                     widget.viewModel.toggleItemCompletion(item, index);
                   },
                   onDelete: () {
-                    print('Deleted "${item.name}"');
+                    widget.viewModel.deleteItem(item);
                   },
                 );
               },

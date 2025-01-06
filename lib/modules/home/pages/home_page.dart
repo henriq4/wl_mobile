@@ -22,11 +22,18 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     widget.viewModel.addListener(() {
-      setState(() {});
+      setState(() {
+        _insertItem();
+      });
     });
   }
 
+  void _insertItem() {
+    _listKey.currentState?.insertItem(widget.viewModel.items.length - 1);
+  }
+
   get pendingItemsCount => widget.viewModel.pendingItemsCount;
+  get items => widget.viewModel.items;
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +59,11 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            AnimatedList(
-              key: _listKey,
+            ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              initialItemCount: widget.viewModel.items.length,
-              itemBuilder: (context, index, animation) {
-                var item = widget.viewModel.items[index];
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                var item = items[index];
 
                 if (item.isCompleted) {
                   return SizedBox();
