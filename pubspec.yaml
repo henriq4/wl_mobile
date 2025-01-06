@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
 
   lazy_load_indexed_stack: ^1.1.0
+  modal_bottom_sheet: ^3.0.0
+  flutter_form_builder: ^9.7.0
   cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
 
