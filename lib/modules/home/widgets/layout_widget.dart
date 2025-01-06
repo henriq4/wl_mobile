@@ -1,5 +1,7 @@
+import 'package:Taski/modules/home/pages/create_page.dart';
 import 'package:Taski/modules/home/pages/done_page.dart';
 import 'package:Taski/modules/home/pages/home_page.dart';
+import 'package:Taski/modules/home/pages/search_page.dart';
 import 'package:Taski/modules/home/view_models/item_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
@@ -37,8 +39,8 @@ class _LayoutWidgetState extends State<LayoutWidget> {
         index: _selectedIndex,
         children: [
           HomePage(viewModel: _viewModel),
-          Placeholder(),
-          Placeholder(),
+          CreatePage(viewModel: _viewModel),
+          SearchPage(viewModel: _viewModel),
           DonePage(viewModel: _viewModel),
         ],
       ),
