@@ -7,7 +7,8 @@ class TodoWidget extends StatefulWidget {
   final Function onCheckChanged;
   final Function onDelete;
 
-  TodoWidget({
+  const TodoWidget({
+    super.key,
     required this.title,
     required this.subtitle,
     required this.isCompleted,
@@ -16,6 +17,7 @@ class TodoWidget extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _TodoWidgetState createState() => _TodoWidgetState();
 }
 
@@ -38,15 +40,8 @@ class _TodoWidgetState extends State<TodoWidget> {
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Color(0xFFF5F7F9),
           borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade200,
-              blurRadius: 10,
-              offset: Offset(0, 5),
-            ),
-          ],
         ),
         child: Column(
           children: [
@@ -59,12 +54,16 @@ class _TodoWidgetState extends State<TodoWidget> {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
                       border: Border.all(
-                        color: widget.isCompleted ? Colors.blue : Colors.grey,
+                        color: widget.isCompleted
+                            ? Colors.grey.shade300
+                            : Colors.grey.shade400,
                         width: 2,
                       ),
-                      color: widget.isCompleted ? Colors.blue : Colors.white,
+                      borderRadius: BorderRadius.circular(6),
+                      color: widget.isCompleted
+                          ? Colors.grey.shade300
+                          : Colors.white,
                     ),
                     width: 24,
                     height: 24,
@@ -82,9 +81,11 @@ class _TodoWidgetState extends State<TodoWidget> {
                   child: Text(
                     widget.title,
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: widget.isCompleted ? Colors.grey : Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: widget.isCompleted
+                          ? Colors.grey.shade500
+                          : Color(0xFF3F3D56),
                     ),
                   ),
                 ),

@@ -50,12 +50,22 @@ class _SearchPageState extends State<SearchPage> {
                 controller: _searchController,
                 decoration: InputDecoration(
                   hintText: 'Search',
-                  prefixIcon: Icon(Icons.search),
-                  //veerify if is text field is empty
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Colors.blue,
+                  ),
+                  fillColor: Color(0xFFF5F7F9),
+                  //verify if is focus to filled
+                  filled: true,
+                  focusColor: Color(0xFFF5F7F9),
                   suffixIcon: _searchController.text.isEmpty
                       ? null
                       : IconButton(
-                          icon: Icon(Icons.close),
+                          icon: Icon(
+                            Icons.close,
+                            color: Colors.grey,
+                            size: 15,
+                          ),
                           onPressed: () {
                             _searchController.clear();
                             widget.viewModel.searchTaskByName('');
@@ -63,6 +73,11 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.blue),
                   ),
                 ),
                 onChanged: widget.viewModel.searchTaskByName,
@@ -109,9 +124,7 @@ class _SearchPageState extends State<SearchPage> {
                   onCheckChanged: () {
                     widget.viewModel.toggleItemCompletion(item, index);
                   },
-                  onDelete: () {
-                    print('Deleted "${item.name}"');
-                  },
+                  onDelete: () {},
                 );
               },
             )

@@ -3,6 +3,7 @@ import 'package:Taski/modules/home/pages/done_page.dart';
 import 'package:Taski/modules/home/pages/home_page.dart';
 import 'package:Taski/modules/home/pages/search_page.dart';
 import 'package:Taski/modules/home/view_models/item_list_view_model.dart';
+import 'package:Taski/modules/home/widgets/destination_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
@@ -38,38 +39,42 @@ class _LayoutWidgetState extends State<LayoutWidget> {
       body: LazyLoadIndexedStack(
         index: _selectedIndex,
         children: [
-          HomePage(viewModel: _viewModel),
+          HomePage(
+            viewModel: _viewModel,
+            onNavigateToCreate: () => _onTap(1),
+          ),
           CreatePage(viewModel: _viewModel),
           SearchPage(viewModel: _viewModel),
           DonePage(viewModel: _viewModel),
         ],
       ),
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: Colors.transparent,
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: _onTap,
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.format_list_bulleted),
-            selectedIcon: const Icon(Icons.format_list_bulleted),
-            label: "Todo",
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>(
+            (states) {
+              if (states.contains(WidgetState.selected)) {
+                return TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                );
+              }
+              return TextStyle(
+                color: Colors.grey,
+              );
+            },
           ),
-          NavigationDestination(
-            icon: const Icon(Icons.add_box_outlined),
-            selectedIcon: const Icon(Icons.add_box_outlined),
-            label: "Create",
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.search_outlined),
-            selectedIcon: const Icon(Icons.search_outlined),
-            label: "Search",
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.done),
-            selectedIcon: const Icon(Icons.done),
-            label: "Done",
-          ),
-        ],
+        ),
+        child: NavigationBar(
+          backgroundColor: Colors.transparent,
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: _onTap,
+          destinations: [
+            DestinationWidget(icon: Icons.format_list_bulleted, label: "Todo"),
+            DestinationWidget(icon: Icons.add_box_outlined, label: "Create"),
+            DestinationWidget(icon: Icons.search_outlined, label: "Search"),
+            DestinationWidget(icon: Icons.done, label: "Done"),
+          ],
+        ),
       ),
     );
   }
