@@ -1,16 +1,33 @@
-# wl_contulting_mobile
+# WL Taski
 
-A new Flutter project.
+### Pré-requisitos
 
-## Getting Started
+Antes de executar o aplicativo, certifique-se de ter os seguintes pré-requisitos instalados:
 
-This project is a starting point for a Flutter application.
+- [Flutter](https://flutter.dev/docs/get-started/install) (Certifique-se de ter a versão mais recente)
+- [Dart](https://dart.dev/get-dart)
 
-A few resources to get you started if this is your first Flutter project:
+Além disso, você precisará de um emulador Android ou iOS, ou de um dispositivo físico conectado, para testar o aplicativo.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Clonando o Repositório
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Primeiro, clone o repositório do GitHub para o seu ambiente local:
+
+```bash
+https://github.com/henriq4/wl_mobile
+cd wl-mobile
+```
+
+### Configuração do Ambiente
+
+Verifique se o Flutter está configurado corretamente
+
+```bash
+flutter doctor
+```
+
+### Execute o projeto
+
+```bash
+flutter run
+```
