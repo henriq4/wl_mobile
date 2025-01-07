@@ -4,21 +4,9 @@ import 'package:flutter/material.dart';
 class ItemListViewModel extends ChangeNotifier {
   final List<Item> _items = [
     Item(
-      name: 'ABC sign up flow',
-      description:
-          'By the time a prospect arrives at your signup page, in most cases...',
-      isCompleted: false,
-    ),
-    Item(
       name: 'Design sign up flow',
       description:
-          'By the time a prospect arrives at your signup page, in most cases...',
-      isCompleted: false,
-    ),
-    Item(
-      name: 'Design sign up flow',
-      description:
-          'By the time a prospect arrives at your signup page, in most cases...',
+          "By the time a prospect arrives at your signup page, in most cases, they've already By the time a prospect arrives at your signup page, in most cases.",
       isCompleted: false,
     ),
   ];
