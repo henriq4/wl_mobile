@@ -26,6 +26,12 @@ Verifique se o Flutter está configurado corretamente
 flutter doctor
 ```
 
+### Execute os testes unitários
+
+```bash
+flutter test
+```
+
 ### Execute o projeto
 
 ```bash
